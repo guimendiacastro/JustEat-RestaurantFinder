@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A43525D72D9E593E00067BD8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = A43525D62D9E593800067BD8 /* README.md */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		A43525C12D93E61D00067BD8 /* RestaurantFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A43525D62D9E593800067BD8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		A43525B82D93E61D00067BD8 = {
 			isa = PBXGroup;
 			children = (
+				A43525D62D9E593800067BD8 /* README.md */,
 				A43525C32D93E61D00067BD8 /* RestaurantFinder */,
 				A43525C22D93E61D00067BD8 /* Products */,
 			);
@@ -109,6 +115,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A43525D72D9E593E00067BD8 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
