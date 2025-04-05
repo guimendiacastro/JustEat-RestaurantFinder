@@ -15,8 +15,15 @@ struct Restaurant: Codable, Identifiable {
     let name: String
     let cuisines: [Cuisine]
     let rating: Rating?
-    let address: Address
+    let address: Address?
+    let logoUrl: String?
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, cuisines, rating, address, logoUrl
+    }
 }
+
+
 
 struct Cuisine: Codable {
     let name: String
@@ -32,7 +39,9 @@ struct Address: Codable {
     let postalCode: String?
 
     var formatted: String {
-        [firstLine, city, postalCode].compactMap { $0 }.joined(separator: ", ")
+        [firstLine, city, postalCode]
+            .compactMap { $0 }
+            .joined(separator: ", ")
     }
 }
 
