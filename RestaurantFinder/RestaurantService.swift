@@ -10,6 +10,8 @@ struct RestaurantResponse: Codable {
     let restaurants: [Restaurant]
 }
 
+// Main restaurant model
+
 struct Restaurant: Codable, Identifiable {
     let id: String
     let name: String
@@ -18,21 +20,24 @@ struct Restaurant: Codable, Identifiable {
     let address: Address?
     let logoUrl: String?
 
+    // Explicitly define coding keys
     enum CodingKeys: String, CodingKey {
         case id, name, cuisines, rating, address, logoUrl
     }
 }
 
 
-
+// Model for each cuisine type
 struct Cuisine: Codable {
     let name: String
 }
 
+// Model for star rating info
 struct Rating: Codable {
     let starRating: Double?
 }
 
+// Address model with optional fields and a formatted computed property
 struct Address: Codable {
     let firstLine: String?
     let city: String?
@@ -45,6 +50,7 @@ struct Address: Codable {
     }
 }
 
+// class responsible for fetching restaurant data from the Just Eat API
 class RestaurantService {
     func fetchRestaurants(postcode: String) async throws -> [Restaurant] {
         let urlString = "https://uk.api.just-eat.io/discovery/uk/restaurants/enriched/bypostcode/\(postcode)"
@@ -58,6 +64,8 @@ class RestaurantService {
         let (data, _) = try await URLSession.shared.data(for: request)
 
         let decoded = try JSONDecoder().decode(RestaurantResponse.self, from: data)
+        // Return only the first 10 restaurants
+
         return Array(decoded.restaurants.prefix(10))
     }
 }

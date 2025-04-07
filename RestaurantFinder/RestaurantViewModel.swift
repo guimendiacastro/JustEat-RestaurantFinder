@@ -11,14 +11,17 @@ class RestaurantViewModel: ObservableObject {
     @Published var restaurants: [Restaurant] = []
     @Published var errorMessage: String?
 
+    // Fetch restaurants from the API for a given postcode
+    
     func fetch() {
         Task {
             do {
                 let service = RestaurantService()
                 let result = try await service.fetchRestaurants(postcode: "DH14DG")
                 self.restaurants = result
-                self.errorMessage = nil
+                self.errorMessage = nil // Clear any previous errors
             } catch let error as URLError {
+                // Handle specific network-related errors
                 switch error.code {
                 case .notConnectedToInternet:
                     errorMessage = "No internet connection. Check your network."
@@ -30,6 +33,7 @@ class RestaurantViewModel: ObservableObject {
                     errorMessage = "Network error: \(error.localizedDescription)"
                 }
             } catch {
+                // Fallback for any other errors
                 errorMessage = "Something went wrong. Please try again."
             }
         }

@@ -14,6 +14,7 @@ struct ContentView: View {
         NavigationView {
             List(viewModel.restaurants) { restaurant in
                 HStack(alignment: .top, spacing: 16) {
+                    // Attempt to load and display restaurant logo if available
                     if let logo = restaurant.logoUrl, let url = URL(string: logo) {
                         AsyncImage(url: url) { phase in
                             switch phase {
@@ -35,13 +36,14 @@ struct ContentView: View {
                                 EmptyView()
                             }
                         }
+                        // Fallback placeholder if logo is missing
                     } else {
                         Image(systemName: "photo")
                             .resizable()
                             .frame(width: 60, height: 60)
                             .foregroundColor(.gray)
                     }
-
+                    // Restaurant info block
                     VStack(alignment: .leading, spacing: 8) {
                         Text(restaurant.name)
                             .font(.headline)
@@ -62,11 +64,13 @@ struct ContentView: View {
                 }
                 .padding(.vertical, 8)
             }
+            // Pull-to-refresh
             .refreshable {
                 viewModel.fetch()
             }
 
             .navigationTitle("Top 10 Restaurants")
+            // Show alert if there's a network error
             .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
                 Button("OK") {
                     viewModel.errorMessage = nil
@@ -76,6 +80,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
+            // Initial data fetch
             viewModel.fetch()
         }
     }
